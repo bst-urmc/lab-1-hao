@@ -1,7 +1,7 @@
 ---
 title: "Lab 01 - Hello R!"
 date: "2018-01-18 (updated `r Sys.Date()` by TL)"
-author: "Mine Cetinkaya-Rundel and colleagues"
+author: "hao"
 output: 
   html_document: 
     self_contained: no
@@ -60,25 +60,25 @@ Specifically,  we need to configure your git so that RStudio can communicate wit
 
 - Open RStudio and go to the **Console** for these one-off bits.
 Run these lines in interactive mode (you can copy-and-paste them but you'll have to make them specific to yourself).
-```
+```{r}
   library(usethis, gitcreds)
 
   #if that doesn't work, install the packages and try the previous    line again.
-  install.packages("usethis")  #These should only be needed once
-  install.packages("gitcreds") 
+  #install.packages("usethis")  #These should only be needed once
+  #install.packages("gitcreds") 
   
-  ```
+```
 
 -  Let git know about your github username and email by editing this as appropriate and entering it into the Console:
 
   I put 
 
-  ```
+```{r}
   usethis::use_git_config(
   scope = "user",
-  user.name = "Tanzy Love",
-  user.email = "Tanzy_Love@urmc.rochester.edu")
-  ```
+  user.name = "Currrrrrrry",
+  user.email = "11812923@mail.sustech.edu.cn")
+```
 
 -  Next, we need to set up a personal access token so that you can write from rstudio cloud to github. To do this, enter use the following command into the Console:
    ```
@@ -112,9 +112,7 @@ knitr::include_graphics("lab00-demonstration/img/copy-assignment-repo-link.png")
 ###  #'s comment out lines in R code
 
 #you need to change this to the right repository and location for you and your local machine
-usethis::create_from_github("https://github.com/bst-urmc/lab-1-tanzylove",
-   destdir="~/Documents/work/teaching/BST430/")
-
+usethis::create_from_github("https://github.com/bst-urmc/lab-1-hao.git",fork = FALSE)
 ```
 
 - Copy and paste the URL of your assignment repo into the function
