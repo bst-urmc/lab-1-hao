@@ -2,14 +2,14 @@
 title: "lab1"
 output: html_document
 date: "2022-09-13"
-
+author: 'hao'
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r}
+```
   library(usethis, gitcreds)
 
   #if that doesn't work, install the packages and try the previous    line again.
@@ -18,16 +18,23 @@ knitr::opts_chunk$set(echo = TRUE)
   
 ```
 
-```{r}
+```
   usethis::use_git_config(
   scope = "user",
   user.name = "Currrrrrrry",
   user.email = "11812923@mail.sustech.edu.cn")
 ```
 
+```
+library(tidyverse)
+library(datasauRus)
+```
+
 ```{r}
 library(tidyverse)
 library(datasauRus)
+library(knitr)
+#knitr::opts_chunk(fig.width=3, fig.height=3)
 ```
 
 **question 1**
@@ -42,8 +49,10 @@ datasaurus_dozen %>%
   count(dataset) %>%
   print(13)
 ```
+```{marginfigure}
 There are 1846 rows and 3 columns in dataset datsaurus_dozen.
 There are three variables which names are 'dataset', 'x' and 'y'.
+```
 
 **question2**
 ```{r}
@@ -53,15 +62,18 @@ dino_data = datasaurus_dozen %>%
 ```{r}
 library(ggplot2)
 ```
-```{r}
+```{r,fig.height=3,fig.width=6}
 ggplot(data = dino_data, mapping = aes(x = x, y = y)) +
   geom_point()
 dino_data %>%
   summarize(r = cor(x, y))
 ```
+```{marginfigure}
+It is a dinosaur like figure and it has no linear trend. As a result, the correlation is closed to 0.
+```
 
 **question3**
-```{r}
+```{r,fig.height=3,fig.width=6}
 star_data = datasaurus_dozen %>%
   filter(dataset == "star")
 ggplot(data = star_data, mapping = aes(x = x, y = y)) +
@@ -69,10 +81,12 @@ ggplot(data = star_data, mapping = aes(x = x, y = y)) +
 star_data %>%
   summarize(r = cor(x, y))
 ```
-it is a star plot and it is also non-linear
+```{marginfigure}
+It is a star plot and it is also non-linear scatter plot. As a result, the correlation between x and y is closed to 0. The answer looks the same as dinosaur.
+```
 
 **question4**
-```{r}
+```{r,fig.height=3,fig.width=6}
 circle_data = datasaurus_dozen %>%
   filter(dataset == "circle")
 ggplot(data = circle_data, mapping = aes(x = x, y = y)) +
@@ -80,10 +94,12 @@ ggplot(data = circle_data, mapping = aes(x = x, y = y)) +
 circle_data %>%
   summarize(r = cor(x, y))
 ```
-it is a circle plot and it is also non-linear
+```{marginfigure}
+It is a circle plot and a linear trend can not be found in this figure and the coefficient is closed to 0, wchich is the same as dinosaur plot.
+```
 
 **question5**
-```{r}
+```{r,fig.height=3,fig.width=6}
 ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+
   geom_point()+
   facet_wrap(~ dataset, ncol = 3) +
