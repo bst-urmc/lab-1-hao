@@ -1,0 +1,39 @@
+---
+title: "lab1"
+output: html_document
+date: "2022-09-13"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+  library(usethis, gitcreds)
+
+  #if that doesn't work, install the packages and try the previous    line again.
+  #install.packages("usethis")  #These should only be needed once
+  #install.packages("gitcreds") 
+  
+```
+
+```{r}
+  usethis::use_git_config(
+  scope = "user",
+  user.name = "Chrissssyitong",
+  user.email = "yitongzhangkkv@163.com")
+```
+
+
+```{r}
+   usethis::create_github_token()
+```
+
+```{r}
+gitcreds::gitcreds_set()
+```
+
+```{r}
+git_credentials()
+```
+
