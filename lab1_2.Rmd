@@ -1,39 +1,93 @@
 ---
-title: "lab1"
+title: "Lab 01 - Hello R"
+author: "Yitong"
+date: "2022-Supetemper-15"
 output: html_document
-date: "2022-09-13"
 ---
 
+### Load packages
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r}
-  library(usethis, gitcreds)
-
-  #if that doesn't work, install the packages and try the previous    line again.
-  #install.packages("usethis")  #These should only be needed once
-  #install.packages("gitcreds") 
-  
+library(tidyverse) 
+library(datasauRus)
+library(knitr)
 ```
+
+
+### Exercise 1
 
 ```{r}
-  usethis::use_git_config(
-  scope = "user",
-  user.name = "Chrissssyitong",
-  user.email = "yitongzhangkkv@163.com")
+data=datasaurus_dozen
+nrow(data)
+ncol(data)
+variable.names(data)
+```
+```{r}
+datasaurus_dozen %>%
+  count(dataset) %>%
+  print(13)
+```
+```{marginfigure}
+There are 1846 rows and 3 columns in dataset datsaurus_dozen.
+There are three variables which names are 'dataset', 'x' and 'y'.
 ```
 
+### Exercise 2
 
 ```{r}
-   usethis::create_github_token()
+dino_data = datasaurus_dozen %>%
+  filter(dataset == "dino")
 ```
-
 ```{r}
-gitcreds::gitcreds_set()
+library(ggplot2)
+```
+```{r,fig.height=3,fig.width=6}
+ggplot(data = dino_data, mapping = aes(x = x, y = y)) +
+  geom_point()
 ```
 
+And next calculate the correlation between `x` and `y` in this dataset:
+
+```{r cor-dino}
+dino_data %>%
+  summarize(r = cor(x, y))
+```
+
+### Exercise 3
+
+```{r,fig.height=3,fig.width=6}
+star_data = datasaurus_dozen %>%
+  filter(dataset == "star")
+ggplot(data = star_data, mapping = aes(x = x, y = y)) +
+  geom_point()
+star_data %>%
+  summarize(r = cor(x, y))
+```
+
+### Exercise 4
+
+```{r,fig.height=3,fig.width=6}
+circle_data = datasaurus_dozen %>%
+  filter(dataset == "circle")
+ggplot(data = circle_data, mapping = aes(x = x, y = y)) +
+  geom_point()
+circle_data %>%
+  summarize(r = cor(x, y))
+```
+
+### Exercise 5
+```{r,fig.height=3,fig.width=6}
+ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+
+  geom_point()+
+  facet_wrap(~ dataset, ncol = 3) +
+  theme(legend.position = "none")
+```
 ```{r}
-git_credentials()
+datasaurus_dozen %>%
+  group_by(dataset) %>%
+  summarize(r = cor(x, y)) %>%
+  print(13)
 ```
-
